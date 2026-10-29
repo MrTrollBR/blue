@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@700&display=swap" rel="stylesheet">
+<title>Blueberry's</title>
+<style>
+:root{--bg:#eaf0fb;--ink:#0e1633;--red:#14214d;--leaf:#3f6fd8;--seed:#9db8ff;--folha:#1f9d55;--card:#ffffff;--line:#c5d3f2}
+@media (prefers-color-scheme:dark){:root{--bg:#0a1030;--ink:#e6edff;--red:#14214d;--leaf:#4a78e8;--seed:#9db8ff;--folha:#3dbb76;--card:#131c45;--line:#2a3a7a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS",Verdana,sans-serif;line-height:1.5}
+header{position:relative;overflow:hidden;background:var(--red);color:#fff;padding:2rem 1.25rem 1.75rem;border-bottom:6px solid var(--seed)}
+.wrap{max-width:760px;margin:0 auto}
+.marca{display:flex;align-items:center;gap:1rem}.marca img{height:clamp(100px,28vw,160px);width:auto;flex:none}
+h1{margin:0;font-family:Georgia,serif;font-size:clamp(2.4rem,8vw,4rem);letter-spacing:-.02em}
+h1 span{color:var(--seed)}
+header p{margin:.4rem 0 0;max-width:46ch}
+main{padding:1.5rem 1.25rem 3rem}
+input{width:100%;padding:.8rem 1rem;border:2px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);font:inherit;margin-bottom:1.25rem}
+input:focus-visible,a:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
+ul{list-style:none;margin:0;padding:0;display:grid;gap:.75rem}
+li{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.1rem;background:var(--card);border:2px solid var(--line);border-radius:14px}
+.name{font-weight:bold;font-size:1.1rem}
+.path{font-size:.85rem;opacity:.7;word-break:break-all}
+a.dl{flex:none;background:var(--leaf);color:#fff;text-decoration:none;font-weight:bold;padding:.6rem 1.1rem;border-radius:999px}
+a.dl:hover{background:var(--red)}
+.empty{padding:1rem;text-align:center;opacity:.7}
+#veias{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+header .wrap{position:relative;z-index:1}
+li{position:relative}
+li.destaque{margin-top:.9rem;border-color:#1e50b8}
+.capa{flex:none;width:120px;aspect-ratio:1/1;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#0b1a4a,#1e50b8)}
+.capa img{display:block;width:100%;height:100%;object-fit:cover}
+.info{flex:1;min-width:0}
+.destaque .name{font-family:"Silkscreen","VT323","Courier New",monospace;font-size:1.35rem;letter-spacing:.04em;text-transform:uppercase}
+.selo{position:absolute;top:-.85rem;left:1rem;padding:.15rem .7rem;border-radius:6px;color:#fff;font-family:"Silkscreen","Courier New",monospace;font-size:.8rem;letter-spacing:.06em;background:#1e50b8;animation:pulsa 2.4s ease-in-out infinite}
+@keyframes pulsa{0%,100%{background:#0a2463;box-shadow:0 0 0 rgba(59,139,255,0)}50%{background:#3b8bff;box-shadow:0 0 14px rgba(59,139,255,.75)}}
+@media (prefers-reduced-motion:reduce){.selo{animation:none}}
+@media (max-width:520px){.capa{width:84px}}
+li{flex-wrap:wrap}
+.abas{display:flex;gap:.5rem;margin-bottom:1.25rem}
+.aba,.chip,.det{font:inherit;cursor:pointer;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:.45rem 1rem}
+.aba{font-weight:bold}
+.aba.on,.chip.on{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.barra{display:flex;gap:.6rem;margin-bottom:.9rem}.barra input{margin:0;flex:1}
+select,textarea{font:inherit;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:.5rem .8rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem}
+#det{max-width:min(640px,92vw);border:2px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);padding:1.2rem}
+#det::backdrop{background:rgba(10,16,48,.6)}
+.dtop{display:flex;gap:1rem;align-items:flex-start}.dtop img{width:120px;border-radius:8px}.dtop h2{margin:0 0 .3rem}
+.spec{display:grid;grid-template-columns:auto 1fr;gap:.2rem 1rem;margin:1rem 0}.spec dt{font-weight:bold}.spec dd{margin:0}
+.gal{display:flex;gap:.5rem;overflow-x:auto;margin-bottom:1rem}.gal img{height:110px;border-radius:8px}
+.tr{width:100%;aspect-ratio:16/9;border:0;border-radius:8px;margin-bottom:1rem}
+.dac{display:flex;justify-content:flex-end;gap:.6rem}
+#quadro{width:100%;height:480px;border:2px solid var(--line);border-radius:12px;background:#fff;margin-top:1rem}
+#painel{margin-top:1.5rem;padding:1rem;border:2px dashed var(--leaf);border-radius:14px;display:grid;gap:.6rem}
+#painel input{margin:0}#painel[hidden]{display:none}
+#aba-ajuda h2{margin:1.2rem 0 .2rem;font-size:1.15rem}#aba-ajuda p{margin:0}
+footer{max-width:760px;margin:0 auto;padding:1.5rem 1.25rem 2.5rem;text-align:center;border-top:2px solid var(--line)}
+.arco{font-weight:bold;background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#33cc33,#00ccff,#3366ff,#9933ff,#ff33cc);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+</style>
+</head>
+<body>
+<header><canvas id="veias" aria-hidden="true"></canvas><div class="wrap">
+<div class="marca"><img src="logo.png" alt="Logo do Blueberry's" width="150" height="150"><h1>Blue<span>berry's</span></h1></div>
+<p>Escolha um jogo da lista e baixe o arquivo.</p>
+</div></header>
+<main><div class="wrap">
+<nav class="abas" role="tablist"><button class="aba on" data-aba="jogos" role="tab">Jogos</button><button class="aba" data-aba="jogar" role="tab">Jogar</button><button class="aba" data-aba="ajuda" role="tab">Ajuda</button></nav>
+<section id="aba-jogos">
+<div class="barra"><input id="busca" type="search" placeholder="Buscar jogo" aria-label="Buscar jogo"><select id="ordem" aria-label="Ordenar"><option value="az">A–Z</option><option value="novos">Mais recentes</option></select></div>
+<div id="chips" class="chips"></div>
+<ul id="lista"></ul>
+<section id="painel" hidden>
+<strong>Painel de envio</strong>
+<input id="p-nome" placeholder="Nome do jogo"><input id="p-cat" placeholder="Categoria (ex.: Ação)"><input id="p-desc" placeholder="Descrição curta"><input id="p-arq" type="file">
+<button id="p-add" class="det">Adicionar à lista</button>
+<textarea id="p-saida" rows="6" readonly placeholder="A linha pronta para colar na lista do index.html aparece aqui"></textarea>
+<small>Aqui o jogo entra só na sua tela. Para ficar salvo e deixar outras pessoas enviarem arquivos, é preciso um servidor. Por enquanto, copie a linha acima para a lista e coloque o arquivo na pasta arquivos.</small>
+</section>
+</section>
+<section id="aba-jogar" hidden>
+<p>Jogos que rodam direto no navegador. Escolha um:</p>
+<div id="jogar-lista" class="chips"></div>
+<iframe id="quadro" title="Jogo" hidden allowfullscreen></iframe>
+</section>
+<section id="aba-ajuda" hidden>
+<h2>Como instalar</h2><p>Baixe o arquivo, extraia o .zip ou .7z se for o caso (para .7z use o 7-Zip) e abra o .exe. Siga as instruções do instalador, se houver.</p>
+<h2>O antivírus avisou</h2><p>Programas .exe pouco conhecidos costumam gerar alerta. Baixe apenas de fontes em que você confia e, se tiver dúvida, analise o arquivo antes de abrir.</p>
+<h2>O jogo não abre</h2><p>Confira os requisitos na página de detalhes e atualize os drivers de vídeo. Se continuar, tente abrir como administrador.</p>
+</section>
+<dialog id="det"></dialog>
+<template id="demo"><canvas id="c" width="360" height="420" style="background:#14214d;display:block;margin:auto;max-width:100%"></canvas><script>
+const c=document.getElementById('c'),x=c.getContext('2d');let px=180,s=0,v=3,g=[],t=0,k={};
+onkeydown=e=>k[e.key]=1;onkeyup=e=>k[e.key]=0;
+c.onpointermove=e=>{const r=c.getBoundingClientRect();px=(e.clientX-r.left)*c.width/r.width};
+c.onclick=()=>{if(v<=0){s=0;v=3;g=[]}};
+(function f(){t++;if(v>0){if(k.ArrowLeft)px-=6;if(k.ArrowRight)px+=6;if(t%40==0)g.push({x:20+Math.random()*320,y:0});
+for(const o of g)o.y+=2+s/15;
+g=g.filter(o=>{if(o.y>400&&Math.abs(o.x-px)<36){s++;return 0}if(o.y>420){v--;return 0}return 1})}
+x.clearRect(0,0,360,420);x.fillStyle='#9db8ff';x.fillRect(px-36,400,72,10);
+x.fillStyle='#4a78e8';for(const o of g){x.beginPath();x.arc(o.x,o.y,10,0,7);x.fill()}
+x.fillStyle='#fff';x.font='16px sans-serif';x.fillText('Uvas: '+s+'   Vidas: '+v,10,22);
+if(v<=0)x.fillText('Fim de jogo: clique para jogar de novo',40,210);
+requestAnimationFrame(f)})();
+</script></template>
+</div></main>
+<footer>Todos os direitos reservados <span class="arco">V1</span> e <span class="arco">Gabriel</span></footer>
+<script>
+// A capa fica em capas/ultrakill.jpg (salve a imagem nessa pasta).
+const CAPA_ULTRAKILL = "capas/ultrakill.jpg";
+// Link do arquivo hospedado fora do site (GitHub Releases).
+// Quando quiser baixar direto, troque por: https://github.com/MrTrollBR/blue/releases/download/v1.0/Ultrakill.7z
+const LINK_ULTRAKILL = "https://github.com/MrTrollBR/blue/releases";
+// MODELO para adicionar um jogo (copie, cole e preencha; campos vazios aparecem como "—"):
+// { nome:"", caminho:"arquivos/jogo.zip", capa:"capas/jogo.jpg", categoria:"", descricao:"", tamanho:"", versao:"", requisitos:"", data:"2026-10-28", imagens:[], trailer:"", destaque:false }
+const jogos = [
+  { nome: "ULTRAKILL", caminho: LINK_ULTRAKILL, capa: CAPA_ULTRAKILL, destaque: true, categoria: "Ação", descricao: "Jogo de tiro em primeira pessoa, rápido e intenso.", tamanho: "", versao: "", requisitos: "", data: "2026-10-28", imagens: [], trailer: "" }
+];
+// Jogos que rodam no navegador: { nome:"", caminho:"web/meujogo/index.html" }
+const webjogos = [ { nome: "Colha as uvas (exemplo)", demo: true } ];
+// Para o painel secreto: ↑ ↑ ↓ ↓ ← → ← → B A
+
+const $ = s => document.querySelector(s);
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
+const mb = b => b >= 1073741824 ? (b / 1073741824).toFixed(1) + " GB" : (b / 1048576).toFixed(1) + " MB";
+let cat = "Todos";
+
+// Botão Baixar: links externos (https://...) abrem em nova aba.
+const link = (a, j) => {
+  a.href = j.caminho;
+  a.setAttribute("download", "");
+  if (/^https?:/i.test(j.caminho)) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
+};
+
+function chips() {
+  const box = $("#chips"); box.innerHTML = "";
+  for (const c of ["Todos", ...new Set(jogos.map(j => j.categoria).filter(Boolean))]) {
+    const b = el("button", "chip" + (c === cat ? " on" : ""), c);
+    b.onclick = () => { cat = c; chips(); desenhar(); };
+    box.append(b);
+  }
+}
+
+function desenhar() {
+  const q = $("#busca").value.trim().toLowerCase();
+  const l = jogos.filter(j => j.nome.toLowerCase().includes(q) && (cat === "Todos" || j.categoria === cat));
+  l.sort($("#ordem").value === "novos" ? (a, b) => (b.data || "").localeCompare(a.data || "") : (a, b) => a.nome.localeCompare(b.nome));
+  const ul = $("#lista"); ul.innerHTML = "";
+  if (!l.length) { ul.append(el("li", "empty", "Nenhum jogo encontrado.")); return; }
+  for (const j of l) {
+    const li = el("li", j.destaque ? "destaque" : "");
+    if (j.destaque) li.append(el("span", "selo", "DESTAQUE"));
+    if (j.capa) { const cp = el("div", "capa"), im = new Image(); im.src = j.capa; im.alt = "Capa de " + j.nome; im.onerror = () => im.remove(); cp.append(im); li.append(cp); }
+    const info = el("div", "info");
+    info.append(el("div", "name", j.nome), el("div", "path", [j.categoria, j.tamanho, j.versao].filter(Boolean).join(" • ") || j.caminho));
+    const det = el("button", "det", "Detalhes"); det.onclick = () => abrir(j);
+    const a = el("a", "dl", "Baixar"); link(a, j);
+    li.append(info, det, a); ul.append(li);
+  }
+}
+
+function abrir(j) {
+  const d = $("#det"); d.innerHTML = "";
+  const top = el("div", "dtop");
+  if (j.capa) { const im = new Image(); im.src = j.capa; im.alt = ""; im.onerror = () => im.remove(); top.append(im); }
+  const t = el("div"); t.append(el("h2", "", j.nome), el("p", "", j.descricao || "Sem descrição ainda.")); top.append(t); d.append(top);
+  const tb = el("dl", "spec");
+  for (const [k, v] of [["Categoria", j.categoria], ["Tamanho", j.tamanho], ["Versão", j.versao], ["Requisitos", j.requisitos], ["Adicionado em", j.data]]) tb.append(el("dt", "", k), el("dd", "", v || "—"));
+  d.append(tb);
+  if (j.imagens && j.imagens.length) { const g = el("div", "gal"); for (const u of j.imagens) { const im = new Image(); im.src = u; im.alt = "Imagem de " + j.nome; g.append(im); } d.append(g); }
+  if (j.trailer) d.append(/youtube|youtu\.be|vimeo/.test(j.trailer) ? Object.assign(el("iframe", "tr"), { src: j.trailer, allowFullscreen: true }) : Object.assign(el("video", "tr"), { src: j.trailer, controls: true }));
+  const ac = el("div", "dac"), f = el("button", "det", "Fechar"); f.onclick = () => d.close();
+  const a = el("a", "dl", "Baixar"); link(a, j);
+  ac.append(f, a); d.append(ac); d.showModal();
+}
+$("#det").addEventListener("click", e => { if (e.target.id === "det") e.target.close(); });
+
+document.querySelectorAll(".aba").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".aba").forEach(x => x.classList.toggle("on", x === b));
+  for (const n of ["jogos", "jogar", "ajuda"]) $("#aba-" + n).hidden = n !== b.dataset.aba;
+});
+
+const fr = $("#quadro");
+for (const w of webjogos) {
+  const b = el("button", "chip", w.nome);
+  b.onclick = () => {
+    fr.hidden = false;
+    if (w.demo) { fr.setAttribute("sandbox", "allow-scripts"); fr.srcdoc = "<!doctype html><body style='margin:0;background:#14214d'>" + $("#demo").innerHTML; }
+    else { fr.setAttribute("sandbox", "allow-scripts allow-same-origin allow-pointer-lock allow-fullscreen"); fr.removeAttribute("srcdoc"); fr.src = w.caminho; }
+  };
+  $("#jogar-lista").append(b);
+}
+
+const seq = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"]; let pos = 0;
+addEventListener("keydown", e => {
+  if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+  pos = e.key.toLowerCase() === seq[pos].toLowerCase() ? pos + 1 : (e.key === seq[0] ? 1 : 0);
+  if (pos === seq.length) { pos = 0; document.querySelector("[data-aba=jogos]").click(); $("#painel").hidden = false; $("#painel").scrollIntoView({ behavior: "smooth" }); }
+});
+$("#p-add").onclick = () => {
+  const f = $("#p-arq").files[0], n = $("#p-nome").value.trim() || (f ? f.name : "");
+  if (!n) return;
+  const j = { nome: n, caminho: "arquivos/" + (f ? f.name : "arquivo.zip"), categoria: $("#p-cat").value.trim(), descricao: $("#p-desc").value.trim(), tamanho: f ? mb(f.size) : "", data: new Date().toISOString().slice(0, 10) };
+  jogos.push(j); chips(); desenhar(); $("#p-saida").value = JSON.stringify(j, null, 2) + ",";
+};
+
+$("#busca").oninput = desenhar; $("#ordem").onchange = desenhar;
+chips(); desenhar();
+</script>
+<script>
+// Veias azuis que nascem embaixo, sobem devagar e somem no cabeçalho.
+(function () {
+  const cv = document.getElementById("veias");
+  const cx = cv.getContext("2d");
+  const hdr = cv.parentElement;
+  const reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W = 0, H = 0, veias = [];
+
+  function novaVeia(t, inicial) {
+    const vida = (11 + Math.random() * 9) * 1000;
+    return {
+      x: Math.random() * W,
+      amp: 14 + Math.random() * 34,
+      freq: 0.006 + Math.random() * 0.01,
+      fase: Math.random() * 6.28,
+      larg: 0.8 + Math.random() * 1.4,
+      vida: vida,
+      nasc: inicial ? t - Math.random() * vida : t
+    };
+  }
+
+  function medir() {
+    const d = window.devicePixelRatio || 1;
+    W = hdr.clientWidth; H = hdr.clientHeight;
+    cv.width = W * d; cv.height = H * d;
+    cx.setTransform(d, 0, 0, d, 0, 0);
+    const n = Math.max(6, Math.min(18, Math.round(W / 80)));
+    const agora = performance.now();
+    veias = Array.from({ length: n }, () => novaVeia(agora, true));
+    desenhar(agora);
+  }
+
+  function desenhar(t) {
+    cx.clearRect(0, 0, W, H);
+    cx.shadowColor = "rgba(157,184,255,.55)";
+    cx.shadowBlur = 6;
+    for (const v of veias) {
+      let p = (t - v.nasc) / v.vida;
+      if (p >= 1) { Object.assign(v, novaVeia(t, false)); p = 0; }
+      const alfa = Math.sin(Math.PI * p) * 0.42;
+      if (alfa < 0.01) continue;
+      const crescer = Math.min(1, p * 2);
+      cx.save();
+      cx.translate(0, -p * H * 0.25);
+      cx.beginPath();
+      for (let y = H * 1.3; y >= -10; y -= 6) {
+        const x = v.x + v.amp * Math.sin(y * v.freq + v.fase + t * 0.0002) + (H - y) * 0.08 * Math.sin(v.fase);
+        if (y === H * 1.3) cx.moveTo(x, y); else cx.lineTo(x, y);
+      }
+      cx.setLineDash([H * 1.5 * crescer, 99999]);
+      cx.strokeStyle = "rgba(157,184,255," + alfa + ")";
+      cx.lineWidth = v.larg;
+      cx.lineCap = "round";
+      cx.stroke();
+      cx.restore();
+    }
+  }
+
+  function loop(t) { desenhar(t); requestAnimationFrame(loop); }
+
+  new ResizeObserver(medir).observe(hdr);
+  medir();
+  if (!reduz) requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
